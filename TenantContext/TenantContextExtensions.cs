@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace TenantContext;
 
@@ -30,7 +29,4 @@ public static class TenantContextExtensions
 
         return app.UseMiddleware<TenantContextMiddleware>();
     }
-
-    public static void AddClientContextOperationFilter(this SwaggerGenOptions swaggerGenOptions)
-        => swaggerGenOptions.OperationFilter<TenantContextOperationFilter>();
 }

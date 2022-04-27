@@ -21,20 +21,19 @@ internal class TenantContextMiddleware
 
         try
         {
-            string tenant = null;
             var host = context.Request.Host.Host;
+            var tenant = host?.Split('.').ElementAtOrDefault(0)?.Trim().ToLower();
 
-            if (!string.IsNullOrWhiteSpace(host))
+            if (tenantContextOptions.AvailableTenants.Contains(tenant))
             {
-                tenant = host.Split('.')[0];
+                tenantContextAccessor.TenantContext.Tenant = new(tenant);
+                await next(context);
             }
-
-            tenantContextAccessor.TenantContext.Tenant = new Tenant(tenant?.Trim().ToLower());
         }
         catch
         {
         }
 
-        await next(context);
+        context.Response.StatusCode = StatusCodes.Status404NotFound;
     }
 }

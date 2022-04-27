@@ -15,14 +15,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTenantContextAccessor();
+var tenants = Configure<List<TenantInformation>>("Tenants");
 
-var tenants = Configure<IEnumerable<TenantInformation>>("Tenants");
+builder.Services.AddTenantContextAccessor(options =>
+{
+    options.AvailableTenants = tenants.Select(t => t.Name).ToList();
+});
+
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseTenantContext();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -35,8 +41,6 @@ if (!app.Environment.IsDevelopment())
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
-
-app.UseTenantContext();
 
 app.UseAuthorization();
 

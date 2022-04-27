@@ -15,4 +15,7 @@
 		<ProjectReference Include="..\TenantContext\TenantContext.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Content Update="appsettings.local.json" CopyToPublishDirectory="Never" />
+	</ItemGroup>
 </Project>
