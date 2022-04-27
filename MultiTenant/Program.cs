@@ -1,6 +1,12 @@
+using MultiTenant.Settings;
 using TenantContext;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host
+    .ConfigureAppConfiguration((hostingContext, config) =>
+    {
+        config.AddJsonFile("appsettings.local.json", optional: true, reloadOnChange: true);
+    });
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -10,6 +16,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTenantContextAccessor();
+
+var tenants = Configure<IEnumerable<TenantInformation>>("Tenants");
 
 var app = builder.Build();
 
@@ -36,3 +44,13 @@ app.MapRazorPages();
 app.MapControllers();
 
 app.Run();
+
+T Configure<T>(string sectionName) where T : class
+{
+    var section = builder.Configuration.GetSection(sectionName);
+    var settings = section.Get<T>();
+    builder.Services.Configure<T>(section);
+
+    return settings;
+}
+
