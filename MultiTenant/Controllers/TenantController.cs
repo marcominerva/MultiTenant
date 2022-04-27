@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TenantContext;
 
-namespace MultiTenant.WebApi.Controllers;
+namespace MultiTenant.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

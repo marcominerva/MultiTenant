@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTenant.WebApi", "MultiTenant.WebApi\MultiTenant.WebApi.csproj", "{9B9BE0A8-EE44-431F-93C8-0112C97FE947}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiTenant", "MultiTenant\MultiTenant.csproj", "{9B9BE0A8-EE44-431F-93C8-0112C97FE947}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenantContext", "TenantContext\TenantContext.csproj", "{CBFBC385-BCAE-4343-9653-58B27EADA3BE}"
 EndProject
