@@ -4,5 +4,7 @@ public class Tenant
 {
     public string Name { get; init; }
 
+    public string Image { get; init; }
+
     public string SqlConnectionString { get; init; }
 }

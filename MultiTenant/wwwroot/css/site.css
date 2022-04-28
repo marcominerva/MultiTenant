@@ -9,15 +9,3 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 }
-
-.download-item {
-    display: inline-block;
-}
-
-.sz-day__title {
-    display: none;
-}
-
-.sz-timezone {
-    display: none !important;
-}
