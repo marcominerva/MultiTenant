@@ -1,20 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Options;
-using MultiTenant.Settings;
-using TenantContext;
+using MultiTenant.BusinessLayer.Services.Interfaces;
+using MultiTenant.Shared.Models;
 
 namespace MyCommunityEvents.Pages;
 
 public class IndexModel : PageModel
 {
-    public TenantInformation Tenant { get; set; }
+    private readonly ITenantService tenantService;
 
-    public IndexModel(ITenantContextAccessor tenantContextAccessor, IOptions<List<TenantInformation>> tenantOptions)
+    public Tenant Tenant { get; set; }
+
+    public IndexModel(ITenantService tenantService)
     {
-        Tenant = tenantOptions.Value.FirstOrDefault(t => t.Name == tenantContextAccessor.TenantContext.Tenant?.Name);
+        this.tenantService = tenantService;
     }
 
     public IActionResult OnGet()
-        => Page();
+    {
+        Tenant = tenantService.GetCurrent();
+        return Page();
+    }
 }

@@ -2,5 +2,5 @@
 
 public interface ITenantContext
 {
-    public Tenant Tenant { get; set; }
+    public string Name { get; set; }
 }

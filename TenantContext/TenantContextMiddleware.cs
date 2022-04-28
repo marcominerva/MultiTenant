@@ -26,7 +26,7 @@ internal class TenantContextMiddleware
 
             if (tenantContextOptions.AvailableTenants.Contains(tenant))
             {
-                tenantContextAccessor.TenantContext.Tenant = new(tenant);
+                tenantContextAccessor.TenantContext.Name = tenant;
                 await next(context);
             }
         }

@@ -1,4 +1,6 @@
-using MultiTenant.Settings;
+using MultiTenant.BusinessLayer.Services;
+using MultiTenant.BusinessLayer.Services.Interfaces;
+using MultiTenant.Shared.Models;
 using TenantContext;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,13 +17,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var tenants = Configure<List<TenantInformation>>("Tenants");
+var tenants = Configure<List<Tenant>>("Tenants");
 
 builder.Services.AddTenantContextAccessor(options =>
 {
     options.AvailableTenants = tenants.Select(t => t.Name).ToList();
 });
 
+builder.Services.AddScoped<ITenantService, TenantService>();
 
 var app = builder.Build();
 

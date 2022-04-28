@@ -17,7 +17,7 @@ public class TenantController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        var tenant = tenantContextAccessor.TenantContext.Tenant;
-        return Ok(tenant);
+        var tenant = tenantContextAccessor.TenantContext.Name;
+        return Ok(new { Name = tenant });
     }
 }

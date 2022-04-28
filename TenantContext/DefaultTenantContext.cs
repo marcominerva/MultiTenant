@@ -2,9 +2,5 @@
 
 internal class DefaultTenantContext : ITenantContext
 {
-    public Tenant Tenant { get; set; }
-
-    public DefaultTenantContext()
-    {
-    }
+    public string Name { get; set; }
 }

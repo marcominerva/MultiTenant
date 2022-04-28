@@ -1,6 +1,6 @@
-﻿namespace MultiTenant.Settings;
+﻿namespace MultiTenant.Shared.Models;
 
-public class TenantInformation
+public class Tenant
 {
     public string Name { get; init; }
 
