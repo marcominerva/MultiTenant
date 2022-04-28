@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MultiTenant.DataAccessLayer\MultiTenant.DataAccessLayer.csproj" />
     <ProjectReference Include="..\MultiTenant.Shared\MultiTenant.Shared.csproj" />
     <ProjectReference Include="..\TenantContext\TenantContext.csproj" />
   </ItemGroup>

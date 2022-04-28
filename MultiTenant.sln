@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTenant.Shared", "Multi
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MultiTenant.Database", "MultiTenant.Database\MultiTenant.Database.sqlproj", "{30E7860A-1055-4C16-82CE-6507BDF2642C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTenant.DataAccessLayer", "MultiTenant.DataAccessLayer\MultiTenant.DataAccessLayer.csproj", "{B7A24EFE-4B3A-4EAD-BE68-A6C07A2157EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{30E7860A-1055-4C16-82CE-6507BDF2642C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30E7860A-1055-4C16-82CE-6507BDF2642C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30E7860A-1055-4C16-82CE-6507BDF2642C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B7A24EFE-4B3A-4EAD-BE68-A6C07A2157EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A24EFE-4B3A-4EAD-BE68-A6C07A2157EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7A24EFE-4B3A-4EAD-BE68-A6C07A2157EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7A24EFE-4B3A-4EAD-BE68-A6C07A2157EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
