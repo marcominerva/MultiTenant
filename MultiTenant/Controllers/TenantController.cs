@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TenantContext;
 
@@ -6,7 +5,6 @@ namespace MultiTenant.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[AllowAnonymous]
 public class TenantController : ControllerBase
 {
     private readonly ITenantContextAccessor tenantContextAccessor;
