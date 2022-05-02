@@ -62,6 +62,7 @@ builder.Services.AddTenantContextAccessor(options =>
 
 builder.Services.AddScoped<ITenantService, TenantService>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 
 builder.Services.AddDbContext<DataContext>((services, options) =>
 {
@@ -102,11 +103,6 @@ builder.Services.AddAuthentication(options =>
         RequireExpirationTime = true,
         ClockSkew = TimeSpan.Zero
     };
-});
-
-builder.Services.AddAuthorization(options =>
-{
-    options.FallbackPolicy = options.DefaultPolicy;
 });
 
 var app = builder.Build();

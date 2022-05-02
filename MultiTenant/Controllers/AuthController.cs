@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MultiTenant.BusinessLayer.Services.Interfaces;
 using MultiTenant.Shared.Models;
@@ -17,7 +16,6 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    [AllowAnonymous]
     public async Task<IActionResult> Login(LoginRequest request)
     {
         var response = await identityService.LoginAsync(request);
@@ -31,7 +29,6 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    [AllowAnonymous]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
         var response = await identityService.RegisterAsync(request);

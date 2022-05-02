@@ -8,17 +8,23 @@ namespace MyCommunityEvents.Pages;
 public class IndexModel : PageModel
 {
     private readonly ITenantService tenantService;
+    private readonly IRestaurantService restaurantService;
 
     public Tenant Tenant { get; set; }
 
-    public IndexModel(ITenantService tenantService)
+    public IEnumerable<Restaurant> Restaurants { get; set; }
+
+    public IndexModel(ITenantService tenantService, IRestaurantService restaurantService)
     {
         this.tenantService = tenantService;
+        this.restaurantService = restaurantService;
     }
 
-    public IActionResult OnGet()
+    public async Task<IActionResult> OnGet()
     {
         Tenant = tenantService.GetCurrent();
+        Restaurants = await restaurantService.GetAsync();
+
         return Page();
     }
 }

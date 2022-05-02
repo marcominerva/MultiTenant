@@ -28,6 +28,7 @@ internal class TenantContextMiddleware
             {
                 tenantContextAccessor.TenantContext.Name = tenant;
                 await next(context);
+                return;
             }
         }
         catch

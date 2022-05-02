@@ -9,3 +9,7 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.restaurant-image {
+    max-width: 120px;
+}

@@ -11,3 +11,24 @@
         <img src="@Model.Tenant?.Image" class="img-fluid rounded" style="max-height: 200px" />
     </div>
 </div>
+
+@if (Model.Restaurants != null)
+{
+    <div class="list-group mt-5">
+        @foreach (var restaurant in Model.Restaurants)
+        {
+            <div class="list-group-item list-group-item-action">
+                <div class="media">
+                    <img src="@restaurant.ImageUrl" class="mr-3 restaurant-image rounded" alt="@restaurant.Name">
+                    <div class="media-body">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mt-0">@restaurant.Name</h5>                           
+                        </div>
+                        <p><i class="bi-map"></i> @restaurant.Address.ToString()</p>
+                        <p><i class="bi-telephone"></i> @restaurant.PhoneNumber</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
