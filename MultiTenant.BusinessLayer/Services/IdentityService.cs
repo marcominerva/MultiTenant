@@ -49,17 +49,16 @@ public class IdentityService : IIdentityService
                 new Claim(ClaimTypes.GroupSid, tenant.Name)
             }.Union(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-        var loginResponse = CreateToken(claims);
-
+        var loginResponse = CreateToken(tenant.Name, claims);
         return loginResponse;
     }
 
-    private AuthResponse CreateToken(IEnumerable<Claim> claims)
+    private AuthResponse CreateToken(string audience, IEnumerable<Claim> claims)
     {
         var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecurityKey));
         var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
-        var jwtSecurityToken = new JwtSecurityToken(jwtSettings.Issuer, jwtSettings.Audience, claims,
+        var jwtSecurityToken = new JwtSecurityToken(jwtSettings.Issuer, audience, claims,
             DateTime.UtcNow, DateTime.UtcNow.AddMinutes(jwtSettings.AccessTokenExpirationMinutes), signingCredentials);
 
         var accessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);

@@ -1,10 +1,13 @@
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
+using MultiTenant.BusinessLayer.Authentication;
 using MultiTenant.BusinessLayer.Services;
 using MultiTenant.BusinessLayer.Services.Interfaces;
 using MultiTenant.BusinessLayer.Settings;
@@ -53,11 +56,13 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var jwtSettings = Configure<JwtSettings>(nameof(JwtSettings));
+
 var tenants = Configure<List<Tenant>>("Tenants");
+var tenantList = tenants.Select(t => t.Name).ToList();
 
 builder.Services.AddTenantContextAccessor(options =>
 {
-    options.AvailableTenants = tenants.Select(t => t.Name).ToList();
+    options.AvailableTenants = tenantList;
 });
 
 builder.Services.AddScoped<ITenantService, TenantService>();
@@ -95,8 +100,7 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuer = true,
         ValidIssuer = jwtSettings.Issuer,
-        ValidateAudience = true,
-        ValidAudience = jwtSettings.Audience,
+        ValidateAudience = false,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecurityKey)),
@@ -104,6 +108,15 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
+
+builder.Services.AddAuthorization(options =>
+{
+    var policyBuilder = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().RequireClaim(ClaimTypes.GroupSid, tenantList);
+    policyBuilder.Requirements.Add(new TenantRequirement());
+    options.DefaultPolicy = policyBuilder.Build();
+});
+
+builder.Services.AddScoped<IAuthorizationHandler, ValidateAudienceHandler>();
 
 var app = builder.Build();
 
