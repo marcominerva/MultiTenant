@@ -19,20 +19,14 @@ internal class TenantContextMiddleware
     {
         tenantContextAccessor.TenantContext = new DefaultTenantContext();
 
-        try
-        {
-            var host = context.Request.Host.Host;
-            var tenant = host?.Split('.').ElementAtOrDefault(0)?.Trim().ToLower();
+        var host = context.Request.Host.Host;
+        var tenant = host?.Split('.').ElementAtOrDefault(0)?.Trim().ToLower();
 
-            if (tenantContextOptions.AvailableTenants.Contains(tenant))
-            {
-                tenantContextAccessor.TenantContext.Name = tenant;
-                await next(context);
-                return;
-            }
-        }
-        catch
+        if (tenantContextOptions.AvailableTenants.Contains(tenant))
         {
+            tenantContextAccessor.TenantContext.Name = tenant;
+            await next(context);
+            return;
         }
 
         context.Response.StatusCode = StatusCodes.Status404NotFound;
