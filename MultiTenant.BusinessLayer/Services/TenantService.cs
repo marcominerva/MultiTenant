@@ -14,6 +14,5 @@ public class TenantService : ITenantService
         tenant = tenantOptions.Value.FirstOrDefault(t => t.Name == tenantContextAccessor.TenantContext.Name);
     }
 
-    public Tenant GetCurrent()
-        => tenant;
+    public Tenant GetCurrent() => tenant;
 }

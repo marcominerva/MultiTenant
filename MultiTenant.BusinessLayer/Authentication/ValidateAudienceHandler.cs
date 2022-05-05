@@ -17,7 +17,7 @@ public class ValidateAudienceHandler : AuthorizationHandler<TenantRequirement>
     {
         if (context.User.Identity.IsAuthenticated)
         {
-            var tenant = tenantService.GetCurrent()?.Name;
+            var tenant = tenantService.GetCurrent().Name;
             var claimAudience = context.User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Aud)?.Value;
 
             if (tenant == claimAudience)
