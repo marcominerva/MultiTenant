@@ -21,7 +21,7 @@ public class MeController : ControllerBase
         {
             firstName,
             lastName,
-            Username = User.Identity.Name,
+            UserName = User.Identity.Name,
             email,
             tenant
         });
