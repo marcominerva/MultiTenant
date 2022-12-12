@@ -20,7 +20,7 @@ internal class TenantContextMiddleware
         tenantContextAccessor.TenantContext = new DefaultTenantContext();
 
         var host = context.Request.Host.Host;
-        var tenant = host?.Split('.').ElementAtOrDefault(0)?.Trim().ToLower();
+        var tenant = host?.Split('.').ElementAtOrDefault(0)?.Trim().ToLowerInvariant();
 
         if (tenantContextOptions.AvailableTenants.Contains(tenant))
         {
