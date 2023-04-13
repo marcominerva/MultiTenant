@@ -17,11 +17,7 @@ using MultiTenant.Shared.Models;
 using TenantContext;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host
-    .ConfigureAppConfiguration((hostingContext, config) =>
-    {
-        config.AddJsonFile("appsettings.local.json", optional: true, reloadOnChange: true);
-    });
+builder.Configuration.AddJsonFile("appsettings.local.json", optional: true, reloadOnChange: true);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
